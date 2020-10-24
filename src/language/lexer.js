@@ -86,6 +86,7 @@ export function isPunctuatorTokenKind(kind: TokenKindEnum): boolean %checks {
     kind === TokenKind.COLON ||
     kind === TokenKind.EQUALS ||
     kind === TokenKind.AT ||
+    kind === TokenKind.HASH ||
     kind === TokenKind.BRACKET_L ||
     kind === TokenKind.BRACKET_R ||
     kind === TokenKind.BRACE_L ||
@@ -151,7 +152,10 @@ function readToken(lexer: Lexer, prev: Token): Token {
       case 33: //  !
         return new Token(TokenKind.BANG, pos, pos + 1, line, col, prev);
       case 35: //  #
-        return readComment(source, pos, line, col, prev);
+        // allow comments but only with a whitespace before, otherwise parse name
+        return body.charCodeAt(pos - 1) === 32
+          ? readComment(source, pos, line, col, prev)
+          : new Token(TokenKind.HASH, pos, pos + 1, line, col, prev);
       case 36: //  $
         return new Token(TokenKind.DOLLAR, pos, pos + 1, line, col, prev);
       case 38: //  &

@@ -1,3 +1,5 @@
+import ns from 'solid-namespace';
+
 import type { GraphQLError } from '../error/GraphQLError';
 import { syntaxError } from '../error/syntaxError';
 
@@ -368,9 +370,10 @@ export class Parser {
    *   - InlineFragment
    */
   parseSelection(): SelectionNode {
-    return this.peek(TokenKind.SPREAD)
+    const fieldOrFragment = this.peek(TokenKind.SPREAD)
       ? this.parseFragment()
       : this.parseField();
+    return fieldOrFragment;
   }
 
   /**
@@ -384,11 +387,32 @@ export class Parser {
     const nameOrAlias = this.parseName();
     let alias;
     let name;
+
+    const isReservedField =
+      nameOrAlias.value === 'id' || nameOrAlias.value === '__typename';
+    const resolves = this.peek(TokenKind.PAREN_L);
+
     if (this.expectOptionalToken(TokenKind.COLON)) {
       alias = nameOrAlias;
       name = this.parseName();
-    } else {
+      name = this.peek(TokenKind.PAREN_L)
+        ? name
+        : { ...name, value: this.parseSchemedName(name.value) };
+    } else if (!resolves && !isReservedField) {
+      name = {
+        ...nameOrAlias,
+        value: this.parseSchemedName(nameOrAlias.value),
+      };
+    } else if (resolves || isReservedField) {
       name = nameOrAlias;
+    } else {
+      throw syntaxError(
+        this._lexer.source,
+        this._lexer.token.start,
+        'Expected field with namespace prefix, but got "' +
+          nameOrAlias.value +
+          '" - Only resolved fields of an operation definition can have no namespace',
+      );
     }
 
     return {
@@ -402,6 +426,27 @@ export class Parser {
         : undefined,
       loc: this.loc(start),
     };
+  }
+
+  /**
+   * URI
+   */
+  parseSchemedName(name: string) {
+    const namespacePrefix = Object.keys(ns()).find((prefix) => prefix === name);
+    if (namespacePrefix === undefined) {
+      const notFoundNamespace = name;
+      throw syntaxError(
+        this._lexer.source,
+        this._lexer.token.start,
+        'Expected field with namespace prefix, but got ' +
+          notFoundNamespace +
+          ' Did you forget to add a namespace prefix or declare the namespace uri for ' +
+          notFoundNamespace +
+          '?',
+      );
+    }
+    this.expectToken(TokenKind.HASH);
+    return ns()[namespacePrefix](this.parseName().value);
   }
 
   /**

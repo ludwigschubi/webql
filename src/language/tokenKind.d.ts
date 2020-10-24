@@ -14,6 +14,7 @@ export const TokenKind: {
   COLON: ':';
   EQUALS: '=';
   AT: '@';
+  HASH: '#';
   BRACKET_L: '[';
   BRACKET_R: ']';
   BRACE_L: '{';

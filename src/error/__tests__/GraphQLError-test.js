@@ -13,7 +13,7 @@ import { GraphQLError, printError } from '../GraphQLError';
 
 const source = new Source(dedent`
   {
-    field
+    rdf#field
   }
 `);
 const ast = parse(source);
