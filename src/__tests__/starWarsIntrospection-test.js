@@ -147,7 +147,7 @@ describe('Star Wars Introspection Tests', () => {
               type: { name: null, kind: 'NON_NULL' },
             },
             {
-              name: 'name',
+              name: 'example#name',
               type: { name: 'String', kind: 'SCALAR' },
             },
             {
@@ -207,7 +207,7 @@ describe('Star Wars Introspection Tests', () => {
               },
             },
             {
-              name: 'name',
+              name: 'example#name',
               type: {
                 name: 'String',
                 kind: 'SCALAR',

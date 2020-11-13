@@ -4,7 +4,7 @@
  */
 export type Character = {
   id: string,
-  name: string,
+  'example#name': string,
   friends: Array<string>,
   appearsIn: Array<number>,
   ...
@@ -13,7 +13,7 @@ export type Character = {
 export type Human = {|
   type: 'Human',
   id: string,
-  name: string,
+  'example#name': string,
   friends: Array<string>,
   appearsIn: Array<number>,
   homePlanet?: string,
@@ -22,7 +22,7 @@ export type Human = {|
 export type Droid = {|
   type: 'Droid',
   id: string,
-  name: string,
+  'example#name': string,
   friends: Array<string>,
   appearsIn: Array<number>,
   primaryFunction: string,
@@ -39,7 +39,7 @@ export type Droid = {|
 const luke: Human = {
   type: 'Human',
   id: '1000',
-  name: 'Luke Skywalker',
+  'example#name': 'Luke Skywalker',
   friends: ['1002', '1003', '2000', '2001'],
   appearsIn: [4, 5, 6],
   homePlanet: 'Tatooine',
@@ -48,7 +48,7 @@ const luke: Human = {
 const vader: Human = {
   type: 'Human',
   id: '1001',
-  name: 'Darth Vader',
+  'example#name': 'Darth Vader',
   friends: ['1004'],
   appearsIn: [4, 5, 6],
   homePlanet: 'Tatooine',
@@ -57,7 +57,7 @@ const vader: Human = {
 const han: Human = {
   type: 'Human',
   id: '1002',
-  name: 'Han Solo',
+  'example#name': 'Han Solo',
   friends: ['1000', '1003', '2001'],
   appearsIn: [4, 5, 6],
 };
@@ -65,7 +65,7 @@ const han: Human = {
 const leia: Human = {
   type: 'Human',
   id: '1003',
-  name: 'Leia Organa',
+  'example#name': 'Leia Organa',
   friends: ['1000', '1002', '2000', '2001'],
   appearsIn: [4, 5, 6],
   homePlanet: 'Alderaan',
@@ -74,7 +74,7 @@ const leia: Human = {
 const tarkin: Human = {
   type: 'Human',
   id: '1004',
-  name: 'Wilhuff Tarkin',
+  'example#name': 'Wilhuff Tarkin',
   friends: ['1001'],
   appearsIn: [4],
 };
@@ -90,7 +90,7 @@ const humanData: {| [id: string]: Human |} = {
 const threepio: Droid = {
   type: 'Droid',
   id: '2000',
-  name: 'C-3PO',
+  'example#name': 'C-3PO',
   friends: ['1000', '1002', '1003', '2001'],
   appearsIn: [4, 5, 6],
   primaryFunction: 'Protocol',
@@ -99,7 +99,7 @@ const threepio: Droid = {
 const artoo: Droid = {
   type: 'Droid',
   id: '2001',
-  name: 'R2-D2',
+  'example#name': 'R2-D2',
   friends: ['1000', '1002', '1003'],
   appearsIn: [4, 5, 6],
   primaryFunction: 'Astromech',

@@ -11,7 +11,7 @@ describe('Star Wars Query Tests', () => {
       const source = `
         query HeroNameQuery {
           hero {
-            name
+            example#name
           }
         }
       `;
@@ -30,7 +30,7 @@ describe('Star Wars Query Tests', () => {
       const source = `
         query HeroNameQuery {
           hero {
-            name
+            example#name
           }
         }
       `;
@@ -53,9 +53,9 @@ describe('Star Wars Query Tests', () => {
         query HeroNameAndFriendsQuery {
           hero {
             id
-            name
+            example#name
             friends {
-              name
+              example#name
             }
           }
         }
@@ -89,12 +89,12 @@ describe('Star Wars Query Tests', () => {
       const source = `
         query NestedQuery {
           hero {
-            name
+            example#name
             friends {
-              name
+              example#name
               appearsIn
               friends {
-                name
+                example#name
               }
             }
           }
@@ -170,10 +170,10 @@ describe('Star Wars Query Tests', () => {
       const source = `
         query FetchLukeAndC3POQuery {
           human(id: "1000") {
-            name
+            example#name
           }
           droid(id: "2000") {
-            name
+            example#name
           }
         }
       `;
@@ -195,7 +195,7 @@ describe('Star Wars Query Tests', () => {
       const source = `
         query FetchSomeIDQuery($someId: String!) {
           human(id: $someId) {
-            name
+            example#name
           }
         }
       `;
@@ -215,7 +215,7 @@ describe('Star Wars Query Tests', () => {
       const source = `
         query FetchSomeIDQuery($someId: String!) {
           human(id: $someId) {
-            name
+            example#name
           }
         }
       `;
@@ -235,7 +235,7 @@ describe('Star Wars Query Tests', () => {
       const source = `
         query humanQuery($id: String!) {
           human(id: $id) {
-            name
+            example#name
           }
         }
       `;
@@ -255,7 +255,7 @@ describe('Star Wars Query Tests', () => {
       const source = `
         query FetchLukeAliased {
           luke: human(id: "1000") {
-            name
+            example#name
           }
         }
       `;
@@ -274,10 +274,10 @@ describe('Star Wars Query Tests', () => {
       const source = `
         query FetchLukeAndLeiaAliased {
           luke: human(id: "1000") {
-            name
+            example#name
           }
           leia: human(id: "1003") {
-            name
+            example#name
           }
         }
       `;
@@ -301,11 +301,11 @@ describe('Star Wars Query Tests', () => {
       const source = `
         query DuplicateFields {
           luke: human(id: "1000") {
-            name
+            example#name
             homePlanet
           }
           leia: human(id: "1003") {
-            name
+            example#name
             homePlanet
           }
         }
@@ -338,7 +338,7 @@ describe('Star Wars Query Tests', () => {
         }
 
         fragment HumanFragment on Human {
-          name
+          example#name
           homePlanet
         }
       `;
@@ -365,7 +365,7 @@ describe('Star Wars Query Tests', () => {
         query CheckTypeOfR2 {
           hero {
             __typename
-            name
+            example#name
           }
         }
       `;
@@ -386,7 +386,7 @@ describe('Star Wars Query Tests', () => {
         query CheckTypeOfLuke {
           hero(episode: EMPIRE) {
             __typename
-            name
+            example#name
           }
         }
       `;
@@ -408,7 +408,7 @@ describe('Star Wars Query Tests', () => {
       const source = `
         query HeroNameQuery {
           hero {
-            name
+            example#name
             secretBackstory
           }
         }
@@ -436,9 +436,9 @@ describe('Star Wars Query Tests', () => {
       const source = `
         query HeroNameQuery {
           hero {
-            name
+            example#name
             friends {
-              name
+              example#name
               secretBackstory
             }
           }
@@ -490,7 +490,7 @@ describe('Star Wars Query Tests', () => {
       const source = `
         query HeroNameQuery {
           mainHero: hero {
-            name
+            example#name
             story: secretBackstory
           }
         }

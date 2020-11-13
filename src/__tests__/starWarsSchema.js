@@ -106,7 +106,7 @@ const characterInterface = new GraphQLInterfaceType({
       type: new GraphQLNonNull(GraphQLString),
       description: 'The id of the character.',
     },
-    name: {
+    'example#name': {
       type: GraphQLString,
       description: 'The name of the character.',
     },
@@ -157,7 +157,7 @@ const humanType = new GraphQLObjectType({
       type: new GraphQLNonNull(GraphQLString),
       description: 'The id of the human.',
     },
-    name: {
+    'example#name': {
       type: GraphQLString,
       description: 'The name of the human.',
     },
@@ -207,7 +207,7 @@ const droidType = new GraphQLObjectType({
       type: new GraphQLNonNull(GraphQLString),
       description: 'The id of the droid.',
     },
-    name: {
+    'example#name': {
       type: GraphQLString,
       description: 'The name of the droid.',
     },

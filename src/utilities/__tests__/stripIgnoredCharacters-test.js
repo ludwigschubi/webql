@@ -165,7 +165,7 @@ describe('stripIgnoredCharacters', () => {
     expectStripped('\n').toEqual('');
     expectStripped(',').toEqual('');
     expectStripped(',,').toEqual('');
-    expectStripped('#comment\n, \n').toEqual('');
+    expectStripped('# comment\n, \n').toEqual('');
 
     for (const ignored of ignoredTokens) {
       expectStripped(ignored).toEqual('');
@@ -182,12 +182,12 @@ describe('stripIgnoredCharacters', () => {
     expectStripped('\n1').toEqual('1');
     expectStripped(',1').toEqual('1');
     expectStripped(',,1').toEqual('1');
-    expectStripped('#comment\n, \n1').toEqual('1');
+    expectStripped('# comment\n, \n1').toEqual('1');
 
     expectStripped('1\n').toEqual('1');
     expectStripped('1,').toEqual('1');
     expectStripped('1,,').toEqual('1');
-    expectStripped('1#comment\n, \n').toEqual('1');
+    expectStripped('1 #comment\n, \n').toEqual('1');
 
     for (const token of [...punctuatorTokens, ...nonPunctuatorTokens]) {
       for (const ignored of ignoredTokens) {

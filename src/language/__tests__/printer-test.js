@@ -157,7 +157,7 @@ describe('Printer: Query document', () => {
         whoever123is: node(id: [123, 456]) {
           id
           ... on User @onInlineFragment {
-            field2 {
+            field2: example#field2 {
               id
               alias: field1(first: 10, after: $foo) @include(if: $foo) {
                 id
@@ -176,7 +176,7 @@ describe('Printer: Query document', () => {
 
       mutation likeStory @onMutation {
         like(story: 123) @onField {
-          story {
+          story: example#story {
             id @onField
           }
         }
@@ -184,12 +184,12 @@ describe('Printer: Query document', () => {
 
       subscription StoryLikeSubscription($input: StoryLikeSubscribeInput) @onSubscription {
         storyLikeSubscribe(input: $input) {
-          story {
-            likers {
-              count
+          story: example#story {
+            likers: example#likers {
+              count: example#count
             }
-            likeSentence {
-              text
+            likeSentence: example#likeSentence {
+              text: example#text
             }
           }
         }

@@ -26,6 +26,7 @@ describe('Validate: Fields on correct type', () => {
       fragment objectFieldSelection on Dog {
         __typename
         name
+        example#nickname
       }
     `);
   });
@@ -59,7 +60,7 @@ describe('Validate: Fields on correct type', () => {
   it('Lying alias selection', () => {
     expectValid(`
       fragment lyingAliasSelection on Dog {
-        name : nickname
+        name : example#nickname
       }
     `);
   });
@@ -96,12 +97,12 @@ describe('Validate: Fields on correct type', () => {
   it('Field not defined on fragment', () => {
     expectErrors(`
       fragment fieldNotDefined on Dog {
-        meowVolume
+        example#meowVolume
       }
     `).to.deep.equal([
       {
         message:
-          'Cannot query field "meowVolume" on type "Dog". Did you mean "barkVolume"?',
+          'Cannot query field "example#meowVolume" on type "Dog". Did you mean "example#barkVolume" or "example#nickname"?',
         locations: [{ line: 3, column: 9 }],
       },
     ]);
@@ -141,13 +142,13 @@ describe('Validate: Fields on correct type', () => {
     expectErrors(`
       fragment fieldNotDefined on Pet {
         ... on Dog {
-          meowVolume
+          example#meowVolume
         }
       }
     `).to.deep.equal([
       {
         message:
-          'Cannot query field "meowVolume" on type "Dog". Did you mean "barkVolume"?',
+          'Cannot query field "example#meowVolume" on type "Dog". Did you mean "example#barkVolume" or "example#nickname"?',
         locations: [{ line: 4, column: 11 }],
       },
     ]);
@@ -156,12 +157,12 @@ describe('Validate: Fields on correct type', () => {
   it('Aliased field target not defined', () => {
     expectErrors(`
       fragment aliasedFieldTargetNotDefined on Dog {
-        volume : mooVolume
+        volume : example#mooVolume
       }
     `).to.deep.equal([
       {
         message:
-          'Cannot query field "mooVolume" on type "Dog". Did you mean "barkVolume"?',
+          'Cannot query field "example#mooVolume" on type "Dog". Did you mean "example#barkVolume" or "example#nickname"?',
         locations: [{ line: 3, column: 9 }],
       },
     ]);
@@ -170,12 +171,12 @@ describe('Validate: Fields on correct type', () => {
   it('Aliased lying field target not defined', () => {
     expectErrors(`
       fragment aliasedLyingFieldTargetNotDefined on Dog {
-        barkVolume : kawVolume
+        barkVolume : example#kawVolume
       }
     `).to.deep.equal([
       {
         message:
-          'Cannot query field "kawVolume" on type "Dog". Did you mean "barkVolume"?',
+          'Cannot query field "example#kawVolume" on type "Dog". Did you mean "example#barkVolume" or "example#nickname"?',
         locations: [{ line: 3, column: 9 }],
       },
     ]);
@@ -197,12 +198,12 @@ describe('Validate: Fields on correct type', () => {
   it('Defined on implementors but not on interface', () => {
     expectErrors(`
       fragment definedOnImplementorsButNotInterface on Pet {
-        nickname
+        example#nickname
       }
     `).to.deep.equal([
       {
         message:
-          'Cannot query field "nickname" on type "Pet". Did you mean to use an inline fragment on "Cat" or "Dog"?',
+          'Cannot query field "example#nickname" on type "Pet". Did you mean to use an inline fragment on "Cat" or "Dog"?',
         locations: [{ line: 3, column: 9 }],
       },
     ]);

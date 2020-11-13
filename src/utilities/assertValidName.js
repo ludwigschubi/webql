@@ -3,6 +3,7 @@ import devAssert from '../jsutils/devAssert';
 import { GraphQLError } from '../error/GraphQLError';
 
 const NAME_RX = /^[_a-zA-Z][_a-zA-Z0-9]*$/;
+const SCHEMED_NAME_RX = /^([a-z]+#{1}[a-z]+)/;
 
 /**
  * Upholds the spec rules about naming.
@@ -25,9 +26,9 @@ export function isValidNameError(name: string): GraphQLError | void {
       `Name "${name}" must not begin with "__", which is reserved by GraphQL introspection.`,
     );
   }
-  if (!NAME_RX.test(name)) {
+  if (!NAME_RX.test(name) && !SCHEMED_NAME_RX.test(name)) {
     return new GraphQLError(
-      `Names must match /^[_a-zA-Z][_a-zA-Z0-9]*$/ but "${name}" does not.`,
+      `Names must match /^[_a-zA-Z][_a-zA-Z0-9]*$/ or /^([a-z]+#{1}[a-z]+)/ but "${name}" does not.`,
     );
   }
 }

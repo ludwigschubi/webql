@@ -4,9 +4,9 @@ query queryName($foo: ComplexType, $site: Site = MOBILE) @onQuery {
   whoever123is: node(id: [123, 456]) {
     id
     ... on User @onInlineFragment {
-      foaf#field2 {
+      example#field2 {
         id
-        alias: foaf#field1(first: 10, after: $foo) @include(if: $foo) {
+        alias: field1(first: 10, after: $foo) @include(if: $foo) {
           id
           ...frag @onFragmentSpread
         }
@@ -23,7 +23,7 @@ query queryName($foo: ComplexType, $site: Site = MOBILE) @onQuery {
 
 mutation likeStory @onMutation {
   like(story: 123) @onField {
-    as#story {
+    example#story {
       id @onField
     }
   }
@@ -32,12 +32,12 @@ mutation likeStory @onMutation {
 subscription StoryLikeSubscription($input: StoryLikeSubscribeInput)
   @onSubscription {
   storyLikeSubscribe(input: $input) {
-    as#story {
-      as#likers {
-        dc#count
+    example#story {
+      example#likers {
+        example#count
       }
-      as#likeSentence {
-        dc#text
+      example#likeSentence {
+        example#text
       }
     }
   }
@@ -58,7 +58,7 @@ fragment frag on Friend @onFragmentDefinition {
 
 {
   unnamed(truthy: true, falsy: false, nullish: null)
-  rdf#query
+  query
 }
 
 query {

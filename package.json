@@ -49,6 +49,7 @@
     "gitpublish:deno": "bash ./resources/gitpublish.sh deno denoDist"
   },
   "dependencies": {
+    "own-namespace": "^0.4.3",
     "solid-namespace": "^0.5.0"
   },
   "devDependencies": {

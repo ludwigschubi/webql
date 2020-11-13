@@ -492,7 +492,7 @@ describe('Type System: Objects must have fields', () => {
     expect(validateSchema(schema)).to.deep.equal([
       {
         message:
-          'Names must match /^[_a-zA-Z][_a-zA-Z0-9]*$/ but "bad-name-with-dashes" does not.',
+          'Names must match /^[_a-zA-Z][_a-zA-Z0-9]*$/ or /^([a-z]+#{1}[a-z]+)/ but "bad-name-with-dashes" does not.',
       },
     ]);
   });
@@ -534,7 +534,7 @@ describe('Type System: Fields args must be properly named', () => {
     expect(validateSchema(schema)).to.deep.equal([
       {
         message:
-          'Names must match /^[_a-zA-Z][_a-zA-Z0-9]*$/ but "bad-name-with-dashes" does not.',
+          'Names must match /^[_a-zA-Z][_a-zA-Z0-9]*$/ or /^([a-z]+#{1}[a-z]+)/ but "bad-name-with-dashes" does not.',
       },
     ]);
   });
@@ -968,7 +968,7 @@ describe('Type System: Enum types must be well defined', () => {
     expect(validateSchema(schema1)).to.deep.equal([
       {
         message:
-          'Names must match /^[_a-zA-Z][_a-zA-Z0-9]*$/ but "#value" does not.',
+          'Names must match /^[_a-zA-Z][_a-zA-Z0-9]*$/ or /^([a-z]+#{1}[a-z]+)/ but "#value" does not.',
       },
     ]);
 
@@ -976,7 +976,7 @@ describe('Type System: Enum types must be well defined', () => {
     expect(validateSchema(schema2)).to.deep.equal([
       {
         message:
-          'Names must match /^[_a-zA-Z][_a-zA-Z0-9]*$/ but "1value" does not.',
+          'Names must match /^[_a-zA-Z][_a-zA-Z0-9]*$/ or /^([a-z]+#{1}[a-z]+)/ but "1value" does not.',
       },
     ]);
 
@@ -984,7 +984,7 @@ describe('Type System: Enum types must be well defined', () => {
     expect(validateSchema(schema3)).to.deep.equal([
       {
         message:
-          'Names must match /^[_a-zA-Z][_a-zA-Z0-9]*$/ but "KEBAB-CASE" does not.',
+          'Names must match /^[_a-zA-Z][_a-zA-Z0-9]*$/ or /^([a-z]+#{1}[a-z]+)/ but "KEBAB-CASE" does not.',
       },
     ]);
 

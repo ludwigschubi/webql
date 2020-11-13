@@ -37,8 +37,8 @@ export const testSchema = buildSchema(`
 
   type Dog implements Being & Pet & Mammal & Canine {
     name(surname: Boolean): String
-    nickname: String
-    barkVolume: Int
+    example#nickname: String
+    example#barkVolume: Int
     barks: Boolean
     doesKnowCommand(dogCommand: DogCommand): Boolean
     isHouseTrained(atOtherHomes: Boolean = true): Boolean
@@ -49,9 +49,9 @@ export const testSchema = buildSchema(`
 
   type Cat implements Being & Pet {
     name(surname: Boolean): String
-    nickname: String
+    example#nickname: String
     meows: Boolean
-    meowsVolume: Int
+    example#meowsVolume: Int
     furColor: FurColor
   }
 

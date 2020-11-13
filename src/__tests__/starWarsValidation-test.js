@@ -34,7 +34,7 @@ describe('Star Wars Validation Tests', () => {
         }
 
         fragment NameAndAppearances on Character {
-          name
+          example#name
           appearsIn
         }
       `;
@@ -65,7 +65,7 @@ describe('Star Wars Validation Tests', () => {
       const query = `
         query HeroFieldsOnScalarQuery {
           hero {
-            name {
+            example#name {
               firstCharacterOfName
             }
           }
@@ -78,7 +78,7 @@ describe('Star Wars Validation Tests', () => {
       const query = `
         query DroidFieldOnCharacter {
           hero {
-            name
+            example#name
             primaryFunction
           }
         }
@@ -90,7 +90,7 @@ describe('Star Wars Validation Tests', () => {
       const query = `
         query DroidFieldInFragment {
           hero {
-            name
+            example#name
             ...DroidFields
           }
         }
@@ -106,7 +106,7 @@ describe('Star Wars Validation Tests', () => {
       const query = `
         query DroidFieldInFragment {
           hero {
-            name
+            example#name
             ... on Droid {
               primaryFunction
             }

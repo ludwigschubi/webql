@@ -1,4 +1,4 @@
-import ns from 'solid-namespace';
+import ns from 'own-namespace';
 
 import type { GraphQLError } from '../error/GraphQLError';
 import { syntaxError } from '../error/syntaxError';
@@ -370,10 +370,9 @@ export class Parser {
    *   - InlineFragment
    */
   parseSelection(): SelectionNode {
-    const fieldOrFragment = this.peek(TokenKind.SPREAD)
+    return this.peek(TokenKind.SPREAD)
       ? this.parseFragment()
       : this.parseField();
-    return fieldOrFragment;
   }
 
   /**
@@ -388,31 +387,27 @@ export class Parser {
     let alias;
     let name;
 
-    const isReservedField =
-      nameOrAlias.value === 'id' || nameOrAlias.value === '__typename';
-    const resolves = this.peek(TokenKind.PAREN_L);
-
     if (this.expectOptionalToken(TokenKind.COLON)) {
       alias = nameOrAlias;
       name = this.parseName();
-      name = this.peek(TokenKind.PAREN_L)
-        ? name
-        : { ...name, value: this.parseSchemedName(name.value) };
-    } else if (!resolves && !isReservedField) {
+      name = this.expectOptionalToken(TokenKind.HASH)
+        ? { ...name, value: this.parseSchemedName(name.value) }
+        : name;
+    } else if (this.expectOptionalToken(TokenKind.HASH)) {
+      const schemedName = this.parseSchemedName(nameOrAlias.value);
+      alias = {
+        kind: 'Name',
+        value: schemedName.substr(
+          schemedName.lastIndexOf('#') + 1,
+          schemedName.length,
+        ),
+      };
       name = {
         ...nameOrAlias,
-        value: this.parseSchemedName(nameOrAlias.value),
+        value: schemedName,
       };
-    } else if (resolves || isReservedField) {
-      name = nameOrAlias;
     } else {
-      throw syntaxError(
-        this._lexer.source,
-        this._lexer.token.start,
-        'Expected field with namespace prefix, but got "' +
-          nameOrAlias.value +
-          '" - Only resolved fields of an operation definition can have no namespace',
-      );
+      name = nameOrAlias;
     }
 
     return {
@@ -434,19 +429,17 @@ export class Parser {
   parseSchemedName(name: string) {
     const namespacePrefix = Object.keys(ns()).find((prefix) => prefix === name);
     if (namespacePrefix === undefined) {
-      const notFoundNamespace = name;
       throw syntaxError(
         this._lexer.source,
         this._lexer.token.start,
-        'Expected field with namespace prefix, but got ' +
-          notFoundNamespace +
-          ' Did you forget to add a namespace prefix or declare the namespace uri for ' +
-          notFoundNamespace +
-          '?',
+        'Can\'t find a namespace called "' +
+          name +
+          '". Did you forget to declare the namespace uri for "' +
+          name +
+          '" or to add a CUSTOM_NAMESPACES_PATH to your environment?',
       );
     }
-    this.expectToken(TokenKind.HASH);
-    return ns()[namespacePrefix](this.parseName().value);
+    return `${namespacePrefix}#${this.parseName().value}`;
   }
 
   /**
@@ -948,7 +941,10 @@ export class Parser {
   parseFieldDefinition(): FieldDefinitionNode {
     const start = this._lexer.token;
     const description = this.parseDescription();
-    const name = this.parseName();
+    let name = this.parseName();
+    if (this.expectOptionalToken(TokenKind.HASH)) {
+      name = { ...name, value: this.parseSchemedName(name.value) };
+    }
     const args = this.parseArgumentDefs();
     this.expectToken(TokenKind.COLON);
     const type = this.parseTypeReference();
