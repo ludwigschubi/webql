@@ -34,5 +34,7 @@ declare module 'eslint-plugin-internal-rules/index.js' {
   declare module.exports: $Exports<'eslint-plugin-internal-rules'>;
 }
 declare module 'eslint-plugin-internal-rules/no-dir-import.js' {
-  declare module.exports: $Exports<'eslint-plugin-internal-rules/no-dir-import'>;
+  declare module.exports: $Exports<
+    'eslint-plugin-internal-rules/no-dir-import',
+  >;
 }

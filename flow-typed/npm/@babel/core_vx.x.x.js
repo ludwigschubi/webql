@@ -233,13 +233,17 @@ declare module '@babel/core/lib/config/config-descriptors.js' {
   declare module.exports: $Exports<'@babel/core/lib/config/config-descriptors'>;
 }
 declare module '@babel/core/lib/config/files/configuration.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/files/configuration'>;
+  declare module.exports: $Exports<
+    '@babel/core/lib/config/files/configuration',
+  >;
 }
 declare module '@babel/core/lib/config/files/import.js' {
   declare module.exports: $Exports<'@babel/core/lib/config/files/import'>;
 }
 declare module '@babel/core/lib/config/files/index-browser.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/files/index-browser'>;
+  declare module.exports: $Exports<
+    '@babel/core/lib/config/files/index-browser',
+  >;
 }
 declare module '@babel/core/lib/config/files/index' {
   declare module.exports: $Exports<'@babel/core/lib/config/files'>;
@@ -269,7 +273,9 @@ declare module '@babel/core/lib/config/helpers/config-api.js' {
   declare module.exports: $Exports<'@babel/core/lib/config/helpers/config-api'>;
 }
 declare module '@babel/core/lib/config/helpers/environment.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/helpers/environment'>;
+  declare module.exports: $Exports<
+    '@babel/core/lib/config/helpers/environment',
+  >;
 }
 declare module '@babel/core/lib/config/index' {
   declare module.exports: $Exports<'@babel/core/lib/config'>;
@@ -296,7 +302,9 @@ declare module '@babel/core/lib/config/util.js' {
   declare module.exports: $Exports<'@babel/core/lib/config/util'>;
 }
 declare module '@babel/core/lib/config/validation/option-assertions.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/validation/option-assertions'>;
+  declare module.exports: $Exports<
+    '@babel/core/lib/config/validation/option-assertions',
+  >;
 }
 declare module '@babel/core/lib/config/validation/options.js' {
   declare module.exports: $Exports<'@babel/core/lib/config/validation/options'>;
@@ -332,10 +340,14 @@ declare module '@babel/core/lib/parser/index.js' {
   declare module.exports: $Exports<'@babel/core/lib/parser'>;
 }
 declare module '@babel/core/lib/parser/util/missing-plugin-helper.js' {
-  declare module.exports: $Exports<'@babel/core/lib/parser/util/missing-plugin-helper'>;
+  declare module.exports: $Exports<
+    '@babel/core/lib/parser/util/missing-plugin-helper',
+  >;
 }
 declare module '@babel/core/lib/tools/build-external-helpers.js' {
-  declare module.exports: $Exports<'@babel/core/lib/tools/build-external-helpers'>;
+  declare module.exports: $Exports<
+    '@babel/core/lib/tools/build-external-helpers',
+  >;
 }
 declare module '@babel/core/lib/transform-ast.js' {
   declare module.exports: $Exports<'@babel/core/lib/transform-ast'>;
@@ -350,16 +362,22 @@ declare module '@babel/core/lib/transform.js' {
   declare module.exports: $Exports<'@babel/core/lib/transform'>;
 }
 declare module '@babel/core/lib/transformation/block-hoist-plugin.js' {
-  declare module.exports: $Exports<'@babel/core/lib/transformation/block-hoist-plugin'>;
+  declare module.exports: $Exports<
+    '@babel/core/lib/transformation/block-hoist-plugin',
+  >;
 }
 declare module '@babel/core/lib/transformation/file/file.js' {
   declare module.exports: $Exports<'@babel/core/lib/transformation/file/file'>;
 }
 declare module '@babel/core/lib/transformation/file/generate.js' {
-  declare module.exports: $Exports<'@babel/core/lib/transformation/file/generate'>;
+  declare module.exports: $Exports<
+    '@babel/core/lib/transformation/file/generate',
+  >;
 }
 declare module '@babel/core/lib/transformation/file/merge-map.js' {
-  declare module.exports: $Exports<'@babel/core/lib/transformation/file/merge-map'>;
+  declare module.exports: $Exports<
+    '@babel/core/lib/transformation/file/merge-map',
+  >;
 }
 declare module '@babel/core/lib/transformation/index' {
   declare module.exports: $Exports<'@babel/core/lib/transformation'>;
@@ -368,16 +386,24 @@ declare module '@babel/core/lib/transformation/index.js' {
   declare module.exports: $Exports<'@babel/core/lib/transformation'>;
 }
 declare module '@babel/core/lib/transformation/normalize-file.js' {
-  declare module.exports: $Exports<'@babel/core/lib/transformation/normalize-file'>;
+  declare module.exports: $Exports<
+    '@babel/core/lib/transformation/normalize-file',
+  >;
 }
 declare module '@babel/core/lib/transformation/normalize-opts.js' {
-  declare module.exports: $Exports<'@babel/core/lib/transformation/normalize-opts'>;
+  declare module.exports: $Exports<
+    '@babel/core/lib/transformation/normalize-opts',
+  >;
 }
 declare module '@babel/core/lib/transformation/plugin-pass.js' {
-  declare module.exports: $Exports<'@babel/core/lib/transformation/plugin-pass'>;
+  declare module.exports: $Exports<
+    '@babel/core/lib/transformation/plugin-pass',
+  >;
 }
 declare module '@babel/core/src/config/files/index-browser.js' {
-  declare module.exports: $Exports<'@babel/core/src/config/files/index-browser'>;
+  declare module.exports: $Exports<
+    '@babel/core/src/config/files/index-browser',
+  >;
 }
 declare module '@babel/core/src/config/files/index' {
   declare module.exports: $Exports<'@babel/core/src/config/files'>;
