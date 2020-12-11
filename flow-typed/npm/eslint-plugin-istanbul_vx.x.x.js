@@ -42,17 +42,11 @@ declare module 'eslint-plugin-istanbul/index.js' {
   declare module.exports: $Exports<'eslint-plugin-istanbul'>;
 }
 declare module 'eslint-plugin-istanbul/rules/no-ignore-file.js' {
-  declare module.exports: $Exports<
-    'eslint-plugin-istanbul/rules/no-ignore-file',
-  >;
+  declare module.exports: $Exports<'eslint-plugin-istanbul/rules/no-ignore-file'>;
 }
 declare module 'eslint-plugin-istanbul/rules/prefer-ignore-reason.js' {
-  declare module.exports: $Exports<
-    'eslint-plugin-istanbul/rules/prefer-ignore-reason',
-  >;
+  declare module.exports: $Exports<'eslint-plugin-istanbul/rules/prefer-ignore-reason'>;
 }
 declare module 'eslint-plugin-istanbul/utils/get-documentation-url.js' {
-  declare module.exports: $Exports<
-    'eslint-plugin-istanbul/utils/get-documentation-url',
-  >;
+  declare module.exports: $Exports<'eslint-plugin-istanbul/utils/get-documentation-url'>;
 }
