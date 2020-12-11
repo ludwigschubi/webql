@@ -59,16 +59,19 @@ function buildPackageJSON() {
   delete packageJSON.engines_on_npm;
 
   const { version } = packageJSON;
-  const versionMatch = /^\d+\.\d+\.\d+-?(.*)?$/.exec(version);
+  const versionMatch = /^\d+\.\d+\.\d+-?(?<preReleaseTag>.*)?$/.exec(version);
   if (!versionMatch) {
     throw new Error('Version does not match semver spec: ' + version);
   }
 
-  const [, preReleaseTag] = versionMatch;
+  const { preReleaseTag } = versionMatch.groups;
 
   if (preReleaseTag != null) {
     const [tag] = preReleaseTag.split('.');
-    assert(['alpha', 'beta', 'rc'].includes(tag), `"${tag}" tag is supported.`);
+    assert(
+      tag.startsWith('experimental-') || ['alpha', 'beta', 'rc'].includes(tag),
+      `"${tag}" tag is supported.`,
+    );
 
     assert(!packageJSON.publishConfig, 'Can not override "publishConfig".');
     packageJSON.publishConfig = { tag: tag || 'latest' };

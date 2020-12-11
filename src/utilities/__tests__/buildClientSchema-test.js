@@ -31,15 +31,10 @@ import { introspectionFromSchema } from '../introspectionFromSchema';
  * returns that schema printed as SDL.
  */
 function cycleIntrospection(sdlString: string): string {
-  const options = {
-    specifiedByUrl: true,
-    directiveIsRepeatable: true,
-  };
-
   const serverSchema = buildSchema(sdlString);
-  const initialIntrospection = introspectionFromSchema(serverSchema, options);
+  const initialIntrospection = introspectionFromSchema(serverSchema);
   const clientSchema = buildClientSchema(initialIntrospection);
-  const secondIntrospection = introspectionFromSchema(clientSchema, options);
+  const secondIntrospection = introspectionFromSchema(clientSchema);
 
   /**
    * If the client then runs the introspection query against the client-side
@@ -491,6 +486,14 @@ describe('Type System: build schema from introspection', () => {
 
   it('builds a schema aware of deprecation', () => {
     const sdl = dedent`
+      directive @someDirective(
+        """This is a shiny new argument"""
+        shinyArg: SomeInputObject
+
+        """This was our design mistake :("""
+        oldArg: String @deprecated(reason: "Use shinyArg")
+      ) on QUERY
+
       enum Color {
         """So rosy"""
         RED
@@ -505,13 +508,32 @@ describe('Type System: build schema from introspection', () => {
         MAUVE @deprecated(reason: "No longer in fashion")
       }
 
+      input SomeInputObject {
+        """Nothing special about it, just deprecated for some unknown reason"""
+        oldField: String @deprecated(reason: "Don't use it, use newField instead!")
+
+        """Same field but with a new name"""
+        newField: String
+      }
+
       type Query {
         """This is a shiny string field"""
         shinyString: String
 
         """This is a deprecated string field"""
         deprecatedString: String @deprecated(reason: "Use shinyString")
+
+        """Color of a week"""
         color: Color
+
+        """Some random field"""
+        someField(
+          """This is a shiny new argument"""
+          shinyArg: SomeInputObject
+
+          """This was our design mistake :("""
+          oldArg: String @deprecated(reason: "Use shinyArg")
+        ): String
       }
     `;
 
@@ -520,8 +542,14 @@ describe('Type System: build schema from introspection', () => {
 
   it('builds a schema with empty deprecation reasons', () => {
     const sdl = dedent`
+      directive @someDirective(someArg: SomeInputObject @deprecated(reason: "")) on QUERY
+
       type Query {
-        someField: String @deprecated(reason: "")
+        someField(someArg: SomeInputObject @deprecated(reason: "")): SomeEnum @deprecated(reason: "")
+      }
+
+      input SomeInputObject {
+        someInputField: String @deprecated(reason: "")
       }
 
       enum SomeEnum {

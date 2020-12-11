@@ -1,6 +1,6 @@
 {
   "name": "webql-js",
-  "version": "15.3.1",
+  "version": "15.4.0",
   "description": "A Query Language and Runtime, based on graphql, that is linked-data-compatible.",
   "license": "MIT",
   "main": "index",
@@ -29,7 +29,6 @@
     "node": ">= 10.x"
   },
   "scripts": {
-    "test2": "env",
     "preversion": ". ./resources/checkgit.sh && npm ci",
     "version": "node resources/gen-version.js && npm test && git add src/version.js",
     "fuzzonly": "mocha --full-trace src/**/__tests__/**/*-fuzz.js",
@@ -38,7 +37,6 @@
     "test": "npm run lint && npm run check && npm run testonly && npm run prettier:check && npm run check:spelling && npm run build:npm && npm run build:deno && npm run check:integrations",
     "lint": "eslint --cache .",
     "check": "flow check",
-    "check:cover": "node resources/check-cover.js && nyc report --nycrc-path .nycflowrc.yml",
     "testonly": "mocha --full-trace src/**/__tests__/**/*-test.js",
     "testonly:cover": "nyc npm run testonly",
     "prettier": "prettier --write --list-different .",
@@ -58,22 +56,27 @@
     "@babel/plugin-transform-flow-strip-types": "7.12.1",
     "@babel/preset-env": "7.12.1",
     "@babel/register": "7.12.1",
-    "@typescript-eslint/eslint-plugin": "4.5.0",
-    "@typescript-eslint/parser": "4.5.0",
+    "@typescript-eslint/eslint-plugin": "4.8.1",
+    "@typescript-eslint/parser": "4.8.1",
     "babel-eslint": "10.1.0",
     "chai": "4.2.0",
-    "cspell": "4.1.2",
-    "eslint": "7.11.0",
+    "cspell": "4.2.2",
+    "eslint": "7.13.0",
     "eslint-plugin-flowtype": "5.2.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-internal-rules": "file:./resources/eslint-internal-rules",
     "eslint-plugin-istanbul": "0.1.2",
     "eslint-plugin-node": "11.1.0",
+<<<<<<< HEAD
     "flow-bin": "0.136.0",
     "flow-typed": "^3.2.1",
     "mocha": "8.2.0",
+=======
+    "flow-bin": "0.138.0",
+    "mocha": "8.2.1",
+>>>>>>> cd273ad136d615b3f2f4c830bd8891c7c5590c30
     "nyc": "15.1.0",
-    "prettier": "2.1.2",
-    "typescript": "4.0.3"
+    "prettier": "2.2.0",
+    "typescript": "4.1.2"
   }
 }

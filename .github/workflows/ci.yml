@@ -137,7 +137,7 @@ jobs:
         if: ${{ always() }}
         uses: codecov/codecov-action@v1
         with:
-          file: ./coverage/tests/coverage-final.json
+          file: ./coverage/coverage-final.json
           fail_ci_if_error: true
 
   test:
@@ -145,7 +145,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node_version_to_setup: [10, 12, 14]
+        node_version_to_setup: [10, 12, 14, 15]
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
