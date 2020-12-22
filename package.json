@@ -1,6 +1,6 @@
 {
   "name": "webql-js",
-  "version": "15.4.0",
+  "version": "15.4.1",
   "description": "A Query Language and Runtime, based on graphql, that is linked-data-compatible.",
   "license": "MIT",
   "main": "index",

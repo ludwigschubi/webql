@@ -152,9 +152,10 @@ function readToken(lexer: Lexer, prev: Token): Token {
       case 33: //  !
         return new Token(TokenKind.BANG, pos, pos + 1, line, col, prev);
       case 35: //  #
-        // allow comments but only with a whitespace before, otherwise parse name
+        // allow comments but only with a whitespace before or with another hash after, otherwise parse name
         return body.charCodeAt(pos - 1) === 32 ||
-          body.charCodeAt(pos + 1) === 32
+          body.charCodeAt(pos + 1) === 32 ||
+          body.charCodeAt(pos + 1) === 35
           ? readComment(source, pos, line, col, prev)
           : new Token(TokenKind.HASH, pos, pos + 1, line, col, prev);
       case 36: //  $
